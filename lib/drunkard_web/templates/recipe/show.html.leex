@@ -1,0 +1,40 @@
+<div class="container">
+  <div class="row">
+    <div class="column column-33">
+      <img height="auto" src="<%= Routes.static_path(@socket, get_path(@recipe.image)) %>"/>
+    </div>
+    <div class="column column-66">
+      <h1>Recipe "<%= @recipe.name %>"</h1>
+
+      <strong>Desc:</strong>
+      <p>
+        <%= @recipe.desc %>
+      </p>
+
+      <strong>Steps:</strong>
+      <pre>
+        <%= @recipe.steps %>
+      </pre>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="column column-offset-33">
+      <strong>Ingredients:</strong>
+    </div>
+  </div>
+  <div class="row">
+    <div class="column column-offset-33 content-table container">
+      <%= for ingredient <- @ingredients do %>
+      <div class="content-row row">
+        <div class="column column-10">
+          <%= live_link to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, ingredient.uuid), class: "image-link" do %>
+          <img src="<%= Routes.static_path(@socket, get_path(ingredient.icon)) %>" class="image-in-link"/>
+          <% end %>
+        </div>
+        <div class="column column-90 link-column"><%= live_link ingredient.name, to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, ingredient.uuid) %></div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package drunkard_web.protobuf;
+
+message Units {
+   string id = 1;
+   string one = 2;
+   string some = 3;
+   string many = 4;
+}

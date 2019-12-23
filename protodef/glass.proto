@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package drunkard_web.protobuf;
+
+message Glass {
+   string id = 1;
+   string name = 2;
+   string desc = 3;
+}

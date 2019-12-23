@@ -1,0 +1,30 @@
+<h1>Listing Glasses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Desc</th>
+      <th>Image path</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for glass <- @glasses do %>
+    <tr>
+      <td><%= glass.name %></td>
+      <td><%= glass.desc %></td>
+      <td><%= glass.image_path %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.glass_path(@conn, :show, glass) %></span>
+        <span><%= link "Edit", to: Routes.glass_path(@conn, :edit, glass) %></span>
+        <span><%= link "Delete", to: Routes.glass_path(@conn, :delete, glass), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Glass", to: Routes.glass_path(@conn, :new) %></span>

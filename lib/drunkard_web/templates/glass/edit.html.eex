@@ -1,0 +1,5 @@
+<h1>Edit Glass</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.glass_path(@conn, :update, @glass)) %>
+
+<span><%= link "Back", to: Routes.glass_path(@conn, :index) %></span>

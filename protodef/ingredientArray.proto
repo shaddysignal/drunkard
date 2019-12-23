@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package drunkard_web.protobuf;
+
+import "ingredient.proto";
+
+message IngredientArray {
+  repeated Ingredient ingredient = 1;
+}

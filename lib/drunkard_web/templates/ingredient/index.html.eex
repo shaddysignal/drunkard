@@ -1,0 +1,26 @@
+<h1>Listing Ingredients</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for ingredient <- @ingredients do %>
+    <tr>
+      <td><%= ingredient.name %></td>
+
+      <td>
+        <span><%= link "Show", to: Routes.ingredient_path(@conn, :show, ingredient) %></span>
+        <span><%= link "Edit", to: Routes.ingredient_path(@conn, :edit, ingredient) %></span>
+        <span><%= link "Delete", to: Routes.ingredient_path(@conn, :delete, ingredient), method: :delete, data: [confirm: "Are you sure?"] %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Ingredient", to: Routes.ingredient_path(@conn, :new) %></span>

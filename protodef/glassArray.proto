@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package drunkard_web.protobuf;
+
+import "glass.proto";
+
+message GlassArray {
+  repeated Glass glass = 1;
+}

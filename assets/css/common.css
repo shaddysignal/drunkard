@@ -1,0 +1,54 @@
+.empty {
+  width: 100%;
+}
+
+.all-width {
+  width: 100%;
+}
+
+.search-table {
+  margin: 20px auto;
+}
+
+.content-table .content-row .image-link {
+  flex: 0 0 0;
+  display: inline-block;
+  height: 100%;
+  width: auto;
+}
+
+.content-table .content-row .image-in-link {
+  object-fit: scale-down;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 25% 0;
+  height: 75%;
+}
+
+.content-table .content-row {
+  height: 60px;
+  border-bottom: 1px solid #afafaf;
+}
+
+.content-table .content-row {
+  margin: 10px auto;
+}
+
+.content-table .content-row .column {
+  margin: 0;
+}
+
+.content-table .content-row .link-column {
+  margin: auto 0;
+}
+
+.search-table .search-field {
+  margin: 0;
+}
+
+.search-table .search-button {
+  margin: 0;
+  padding: 0;
+  width: 38px;
+}
+

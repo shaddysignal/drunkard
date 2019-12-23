@@ -1,0 +1,32 @@
+<h1>Show Recipe ingredient</h1>
+
+<ul>
+
+  <li>
+    <strong>Amount:</strong>
+    <%= @recipe_ingredient.amount %>
+  </li>
+
+  <li>
+    <strong>Unit:</strong>
+    <%= @recipe_ingredient.unit %>
+  </li>
+
+  <li>
+    <strong>Is optional:</strong>
+    <%= @recipe_ingredient.is_optional %>
+  </li>
+
+  <li>
+    <strong>Is garnish:</strong>
+    <%= @recipe_ingredient.is_garnish %>
+  </li>
+
+  <li>
+    <strong>Ingredient:</strong>
+    <%= @recipe_ingredient.ingredient %>
+  </li>
+
+</ul>
+
+<span><%= link "Back", to: Routes.recipe_path(@conn, :index) %></span>

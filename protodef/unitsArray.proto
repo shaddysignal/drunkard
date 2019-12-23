@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package drunkard_web.protobuf;
+
+import "units.proto";
+
+message UnitsArray {
+  repeated Units units = 1;
+}

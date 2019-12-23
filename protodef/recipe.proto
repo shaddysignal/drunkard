@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+package drunkard_web.protobuf;
+
+message RecipeIngredient {
+   string id = 1;
+   uint32 amount = 2;
+   string unit_id = 3;
+   repeated string id_of_alternative = 4;
+   bool is_optional_ingredient = 6;
+   bool is_garnish = 7;
+}
+
+message Recipe {
+   string id = 1;
+   string name = 2;
+   repeated RecipeIngredient ingredient = 5;
+   string glass_id = 6;
+   repeated string tag = 7;
+}

@@ -1,0 +1,12 @@
+<%= form_for @changeset, Routes.session_path(@conn, :state), fn f -> %>
+
+  <%= label f, :email %>
+  <%= text_input f, :email %>
+
+  <%= label f, :password %>
+  <%= password_input f, :password, value: input_value(f, :password) %>
+
+  <div>
+    <%= submit "Login", phx_disable_with: "Saving..." %>
+  </div>
+<% end %>

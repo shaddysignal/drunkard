@@ -1,0 +1,30 @@
+<%= f = form_for :search, "#", [phx_change: "suggest", phx_submit: "search", class: "all-width"] %>
+  <div class="search-table container">
+    <div class="row">
+      <div class="column column-90">
+        <%= text_input f, :part, placeholder: "Search...", class: "search-field", value: @query, list: "matches", readonly: if(@loading, do: true) %>
+        <datalist id="matches">
+          <%= for match <- @matches do %>
+            <option value="<%= match %>"><%= match %></option>
+          <% end %>
+        </datalist>
+      </div>
+      <div class="column column-10">
+        <%= submit "O", class: "button button-outline search-button", phx_disable_with: "." %>
+      </div>
+    </div>
+  </div>
+
+  <div class="content-table container">
+    <%= for {match, live_module} <- @found do %>
+    <div class="content-row row">
+      <div class="column column-10">
+        <%= live_link to: Routes.live_path(@socket, live_module, match.uuid), class: "image-link" do %>
+        <img class="image-in-link" src="<%= Routes.static_path(@socket, get_path(match.icon)) %>"/>
+        <% end %>
+      </div>
+      <div class="column column-90 link-column"><%= live_link match.name, to: Routes.live_path(@socket, live_module, match.uuid) %></div>
+    </div>
+    <% end %>
+  </div>
+</form>
