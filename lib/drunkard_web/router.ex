@@ -42,8 +42,8 @@ defmodule DrunkardWeb.Router do
 
       live "/", LiveView.Page.Show
 
-      get "/login", SessionController, :new
-      post "/sessions/state", SessionController, :state
+      # get "/login", SessionController, :new
+      # post "/sessions/state", SessionController, :state
 
       live "/signup", LiveView.User.New
 
@@ -55,37 +55,37 @@ defmodule DrunkardWeb.Router do
       live "/recipes/:uuid", LiveView.Recipe.Show
     end
 
-    scope "/" do
-      pipe_through :authorized
+    # scope "/" do
+    #   pipe_through :authorized
 
-      live "/users/:uuid", LiveView.User.Show, session: [ Guardian.Plug.Keys.token_key() ]
-    end
+    #   live "/users/:uuid", LiveView.User.Show, session: [ Guardian.Plug.Keys.token_key() ]
+    # end
   end
 
   # Other scopes may use custom stacks.
-  scope "/api", DrunkardWeb do
-    pipe_through :api
+  # scope "/api", DrunkardWeb do
+  #   pipe_through :api
 
-    scope "/" do
-      pipe_through :unauthorized
+  #   scope "/" do
+  #     pipe_through :unauthorized
 
-      resources "/glasses", GlassController
-      resources "/ingredients", IngredientController
-      resources "/recipes", RecipeController
-      resources "/tags", TagController
+  #     resources "/glasses", GlassController
+  #     resources "/ingredients", IngredientController
+  #     resources "/recipes", RecipeController
+  #     resources "/tags", TagController
 
-      post "/sessions", SessionController, :create
+  #     post "/sessions", SessionController, :create
 
-      resources "/users", UserController, only: [:create]
-    end
+  #     resources "/users", UserController, only: [:create]
+  #   end
 
-    scope "/" do
-      pipe_through :authorized
+  #   scope "/" do
+  #     pipe_through :authorized
 
-      delete "/sessions", SessionController, :delete
-      post "/sessions/refresh", SessionController, :refresh
+  #     delete "/sessions", SessionController, :delete
+  #     post "/sessions/refresh", SessionController, :refresh
 
-      resources "/users", UserController, except: [:create]
-    end
-  end
+  #     resources "/users", UserController, except: [:create]
+  #   end
+  # end
 end
