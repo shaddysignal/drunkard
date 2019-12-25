@@ -14,10 +14,16 @@ defmodule DrunkardWeb.LiveView.Recipe.Show do
   def handle_params(%{"uuid" => uuid} = _params, _uri, socket) do
     recipe = Recipes.get_recipe!(%{uuid: uuid}) |> Recipes.recipe_preload([:image])
     ingredients = recipe.recipe_ingredients
-                    |> Enum.map(fn ri -> %{uuid: ri.ingredient} end)
-                    |> Enum.map(fn m -> Recipes.get_ingredient!(m) |> Recipes.ingredient_preload([:icon]) end)
+                    |> Enum.map(fn ri -> Map.put(ri, :ingredient, %{uuid: ri.ingredient}) end)
+                    |> Enum.map(fn ri -> Map.put(ri, :ingredient, loadup_ingredient(ri.ingredient)) end)
+                    |> Enum.map(fn ri -> Map.put(ri, :alternatives, Enum.map(ri.alternatives, fn a -> %{uuid: a} end)) end)
+                    |> Enum.map(fn ri -> Map.put(ri, :alternatives, Enum.map(ri.alternatives, &loadup_ingredient/1)) end)
 
-    {:noreply, socket |> assign(recipe: recipe, ingredients: ingredients)}
+    {:noreply, socket |> assign(recipe: recipe, recipe_ingredients: ingredients)}
+  end
+
+  defp loadup_ingredient(m) do
+    Recipes.get_ingredient!(m) |> Recipes.ingredient_preload([:icon])
   end
 
 end

@@ -13,7 +13,7 @@ database_url =
     """
 
 config :drunkard, Drunkard.Repo,
-  ssl: true,
+  # ssl: true,
   url: database_url,
   pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
 
@@ -24,6 +24,6 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
-config :drunkard, DrunkardWeb.Endpoint,
+config :drunkard, DrunkardWeb.Endpoint, server: true,
   http: [port: String.to_integer(System.get_env("PORT") || "4000")],
   secret_key_base: secret_key_base

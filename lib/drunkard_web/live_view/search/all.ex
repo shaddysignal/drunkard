@@ -19,7 +19,12 @@ defmodule DrunkardWeb.LiveView.Search.All do
   def handle_params(%{"value" => value} = _params, _uri, socket) do
     all = get_all!(value) |> pair_with_modules()
 
-    {:noreply, assign_default(socket) |> assign(found: all)}
+    if (length(all) == 1) do
+      uniq = Enum.at(all, 0)
+      {:noreply, live_redirect(socket, to: Routes.live_path(socket, elem(uniq, 1), elem(uniq, 0).uuid))}
+    else
+      {:noreply, assign_default(socket) |> assign(found: all)}
+    end
   end
   def handle_params(_params, _uri, socket), do: {:noreply, assign_default(socket)}
 
@@ -40,6 +45,8 @@ defmodule DrunkardWeb.LiveView.Search.All do
   end
 
   defp get_all!(name_part) do
+    name_part = URI.decode(name_part)
+
     glasses = Recipes.get_glasses_and_preload!(%{name_part: name_part})
     ingredients = Recipes.get_ingredients_and_preload!(%{name_part: name_part})
     recipes = Recipes.get_recipes_and_preload!(%{name_part: name_part})

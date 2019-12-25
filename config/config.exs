@@ -40,9 +40,9 @@ config :drunkard, Drunkard.Guardian,
   key: :token_resource,
   secret_key: "bw4wGH7DsR8lspZ1vFpZELnUxEcpQRVMlLHlCQC4+mGgASGfwjxf+Dh+zpjDI3e9"
 
-config :kernel,
-  sync_nodes_optional: ["1@127.0.0.1", "2@127.0.0.1"],
-  sync_nodes_timeout: 10_000
+# config :kernel,
+#   sync_nodes_optional: ["1@127.0.0.1", "2@127.0.0.1"],
+#   sync_nodes_timeout: 10_000
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

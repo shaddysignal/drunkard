@@ -25,14 +25,24 @@
   </div>
   <div class="row">
     <div class="column column-offset-33 content-table container">
-      <%= for ingredient <- @ingredients do %>
-      <div class="content-row row">
+      <%= for recipe_ingredient <- @recipe_ingredients do %>
+      <div class="content-row row <%= if recipe_ingredient.is_optional, do: "optional-ingredient" %>">
         <div class="column column-10">
-          <%= live_link to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, ingredient.uuid), class: "image-link" do %>
-          <img src="<%= Routes.static_path(@socket, get_path(ingredient.icon)) %>" class="image-in-link"/>
+          <%= live_link to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, recipe_ingredient.ingredient.uuid), class: "image-link" do %>
+          <img src="<%= Routes.static_path(@socket, get_path(recipe_ingredient.ingredient.icon)) %>" class="image-in-link"/>
           <% end %>
         </div>
-        <div class="column column-90 link-column"><%= live_link ingredient.name, to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, ingredient.uuid) %></div>
+        <div class="column column-90 link-column">
+          <%= live_link recipe_ingredient.ingredient.name, to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, recipe_ingredient.ingredient.uuid) %>
+
+          <%= if length(recipe_ingredient.alternatives) != 0 do %>
+          ( alternatives: <%= Enum.map(recipe_ingredient.alternatives, fn alt -> live_link alt.name, to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, alt.uuid) end) %> )
+          <% end %>
+
+          <%= if recipe_ingredient.is_garnish || recipe_ingredient.is_optional do %>
+          <%= "( #{if recipe_ingredient.is_garnish, do: "garnish "}#{if recipe_ingredient.is_optional, do: "optional "})" %>
+          <% end %>
+        </div>
       </div>
       <% end %>
     </div>

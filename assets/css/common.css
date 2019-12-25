@@ -10,6 +10,10 @@
   margin: 20px auto;
 }
 
+.content-table .optional-ingredient {
+  opacity: 0.5;
+}
+
 .content-table .content-row .image-link {
   flex: 0 0 0;
   display: inline-block;
