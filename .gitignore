@@ -35,3 +35,5 @@ npm-debug.log
 
 #Elixir ls
 /.elixir_ls/
+
+.DS_Store
