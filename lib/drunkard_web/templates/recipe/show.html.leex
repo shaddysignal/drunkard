@@ -36,7 +36,7 @@
           <%= live_link recipe_ingredient.ingredient.name, to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, recipe_ingredient.ingredient.uuid) %>
 
           <%= if length(recipe_ingredient.alternatives) != 0 do %>
-          ( alternatives: <%= Enum.map(recipe_ingredient.alternatives, fn alt -> live_link alt.name, to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, alt.uuid) end) %> )
+          ( alternatives: <%= Enum.map(recipe_ingredient.alternatives, fn alt -> live_link alt.name, class: "alternative-link", to: Routes.live_path(@socket, DrunkardWeb.LiveView.Ingredient.Show, alt.uuid) end) %> )
           <% end %>
 
           <%= if recipe_ingredient.is_garnish || recipe_ingredient.is_optional do %>

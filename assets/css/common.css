@@ -46,6 +46,10 @@
   margin: auto 0;
 }
 
+.content-table .content-row .link-column .alternative-link {
+  padding: 0 5px;
+}
+
 .search-table .search-field {
   margin: 0;
 }
