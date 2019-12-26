@@ -28,7 +28,7 @@ defmodule DrunkardWeb.LiveView.Search.All do
   end
   def handle_params(_params, _uri, socket), do: {:noreply, assign_default(socket)}
 
-  def handle_event("suggest", %{"search" => %{"part" => query}} = _params, socket) when byte_size(query) >= 4 and byte_size(query) <= 25 do
+  def handle_event("suggest", %{"search" => %{"part" => query}} = _params, socket) when byte_size(query) >= 2 and byte_size(query) <= 25 do
     all = get_all!(query)
 
     {:noreply, assign_default(socket) |> assign(matches: all |> Enum.map(&(&1.name)))}

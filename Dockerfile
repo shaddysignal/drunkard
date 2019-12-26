@@ -1,8 +1,9 @@
 FROM alpine:3.11
 
-COPY _build/prod/rel/drunkard/bin/drunkard /bin/drunkrad
+RUN mkdir -p /opt/local
+WORKDIR /opt/local
+COPY _build/ .
 
 EXPOSE 4000
 
-ENTRYPOINT [ "drunkard" ]
-CMD [ "start" ]
+CMD [ "_build/prod/rel/drunkard/bin/drunkard", "start" ]
