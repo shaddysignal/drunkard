@@ -1,3 +1,5 @@
+cd $assets_dir
+yarn run deploy
+
 cd $phoenix_dir
-npm --prefix ./assets run build
 mix "${phoenix_ex}.digest" #use the ${phoenix_ex} variable instead of hardcoding phx or phoenix
