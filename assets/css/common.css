@@ -1,5 +1,63 @@
+header .row .column:first-child {
+  text-align: left;
+}
+
+header .row .column {
+  text-align: right;
+}
+
 .empty {
   width: 100%;
+}
+
+.recipes-link-container {
+  text-align: right;
+}
+
+.ingredient-grid .column {
+  position: relative;
+  padding: 0;
+  border: #0069d900 3px solid;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+.ingredient-grid .selected {
+  padding: 0;
+  border: #0069d9 3px solid;
+  border-collapse: separate;
+  border-spacing: 2px;
+}
+
+.ingredient-grid .ingredient-link .hover-name {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  display: table;
+}
+
+.ingredient-grid .ingredient-link .hover-name:hover {
+  background-color: #090909bb;
+}
+
+.ingredient-grid .ingredient-link .hover-name p {
+  color: #00000000;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.ingredient-grid .ingredient-link .hover-name:hover p {
+  color: #dfdfdf;
+}
+
+.ingredient-grid .ingredient-link .image-in-link {
+  max-width: 50px;
+  max-height: 50px;
+  margin: 5px auto;
+  display: flex;
 }
 
 .all-width {

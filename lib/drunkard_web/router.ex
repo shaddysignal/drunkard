@@ -50,6 +50,9 @@ defmodule DrunkardWeb.Router do
       live "/search", LiveView.Search.All
       live "/search/:value", LiveView.Search.All
 
+      live "/ingredients/store", LiveView.Ingredient.Selector
+      live "/ingredients/store/:user_uuid", LiveView.Ingredient.Selector
+
       live "/glasses/:uuid", LiveView.Glass.Show
       live "/ingredients/:uuid", LiveView.Ingredient.Show
       live "/recipes/:uuid", LiveView.Recipe.Show

@@ -19,6 +19,9 @@ defmodule Drunkard.Recipes do
 
   """
   def list_ingredients, do: Repo.all(Ingredient)
+  def list_ingredients(preload_fields) do
+    Repo.all(Ingredient) |> Enum.map(fn i -> ingredient_preload(i, preload_fields) end)
+  end
 
   @doc """
   Gets a single ingredient.
@@ -39,6 +42,12 @@ defmodule Drunkard.Recipes do
 
   def get_ingredients_and_preload!(%{name_part: name_part}) do
     Repo.all(from i in Ingredient, where: ilike(i.name, ^"%#{name_part}%"), preload: [:icon, :image, :alternatives, :tags])
+  end
+  def get_ingredients_and_preload!(names) do
+    Repo.all(from i in Ingredient, where: i.name in ^names, preload: [:icon, :image, :alternatives, :tags])
+  end
+  def get_ingredients_and_preload!(names, preload_fields) do
+    Repo.all(from i in Ingredient, where: i.name in ^names, preload: ^preload_fields)
   end
 
   def ingredient_preload(ingredient, preload_fields) do
@@ -281,8 +290,36 @@ defmodule Drunkard.Recipes do
     Repo.all(from r in Recipe, where: ilike(r.name, ^"%#{name_part}%"), preload: [:icon, :image, :glass, :tags])
   end
 
-  def get_recipes_by_ingredient_preload!(%{ingredient_uuid: iuuid}) do
-    Repo.all(from r in Recipe, where: fragment("? @> ?", r.recipe_ingredients, ^[%{ingredient: iuuid}]), preload: [:icon, :image, :glass, :tags])
+  def get_recipes_by_ingredient_preload!(%{ingredient_uuid: iuuid, preload_fields: preload_fields}) do
+    Repo.all(from r in Recipe,
+              where: fragment(
+                "? @> ? or ? @> ?",
+                r.recipe_ingredients,
+                ^[%{ingredient: iuuid}],
+                r.recipe_ingredients,
+                ^[%{alternatives: [iuuid]}]
+              ),
+              preload: ^preload_fields
+    )
+  end
+  def get_recipes_by_ingredient_preload!(%{ingredient_uuid: _iuuid} = params) do
+    get_recipes_by_ingredient_preload!(Map.put(params, :preload_fields, [:icon, :image, :glass, :tags]))
+  end
+
+  def get_recipes_by_ingredients_preload!(%{ingredient_uuids: ingredient_uuids, preload_fields: preload_fields}) do
+    Repo.all(from r in Recipe,
+              join: iv in fragment("jsonb_array_elements(?)", r.ingredient_variations), on: true,
+              where: fragment(
+                "? @> ?",
+                ^ingredient_uuids,
+                iv
+              ),
+              group_by: r.uuid,
+              preload: ^preload_fields
+    )
+  end
+  def get_recipes_by_ingredients_preload!(%{ingredient_uuids: _ingredient_uuids} = params) do
+    get_recipes_by_ingredients_preload!(Map.put(params, :preload_fields, [:icon, :image, :glass, :tags]))
   end
 
   def recipe_preload(recipe, preload_fields) do

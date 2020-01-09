@@ -11,4 +11,8 @@ defmodule DrunkardWeb.LiveView.Page.Show do
     Phoenix.View.render(DrunkardWeb.PageView, "index.html", assigns)
   end
 
+  def hande_params(_params, _uri, socket) do
+    {:noreply, socket}
+  end
+
 end

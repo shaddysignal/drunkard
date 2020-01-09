@@ -1,0 +1,42 @@
+<div class="container recipes-link-container">
+  <a href="#anchor-recipes">filtered recipes</a>
+</div>
+
+<div class="container ingredient-grid">
+  <%= for chunk <- Enum.chunk_every(@ingredients, 10) do %>
+  <div class="row">
+    <%= for ingredient <- chunk do %>
+    <div class="column column-10 <%= unless is_nil(Enum.find(@selected, nil, fn iuuid -> iuuid == ingredient.uuid end)), do: "selected" %>">
+      <%= live_link to: "#", phx_click: "select", phx_value_ingredient_uuid: ingredient.uuid, class: "ingredient-link", title: ingredient.name do %>
+      <div class="hover-name">
+        <p><%= ingredient.name %></p>
+      </div>
+      <img class="image-in-link" src="<%= Routes.static_path(@socket, get_path(ingredient.icon)) %>"/>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+
+<%= if length(@recipes) != 0 do %>
+<div class="row">
+  <div class="column">
+    <strong id="anchor-recipes">Recipes:</strong>
+  </div>
+</div>
+<div class="row">
+  <div class="column content-table container">
+    <%= for recipe <- @recipes do %>
+    <div class="content-row row">
+      <div class="column column-10">
+        <%= live_link to: Routes.live_path(@socket, DrunkardWeb.LiveView.Recipe.Show, recipe.uuid), class: "image-link" do %>
+        <img src="<%= Routes.static_path(@socket, get_path(recipe.icon)) %>" class="image-in-link"/>
+        <% end %>
+      </div>
+      <div class="column column-90 link-column"><%= live_link recipe.name, to: Routes.live_path(@socket, DrunkardWeb.LiveView.Recipe.Show, recipe.uuid) %></div>
+    </div>
+    <% end %>
+  </div>
+</div>
+<% end %>

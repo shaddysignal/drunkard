@@ -10,18 +10,21 @@
   </head>
   <body>
     <header>
-      <section class="container">
+      <div class="container">
         <div class="row">
-          <div class="column column-10">
-            <%= live_link "[Search]", to: Routes.live_path(DrunkardWeb.Endpoint, DrunkardWeb.LiveView.Search.All) %>
-          </div>
           <div class="column">
             <%= live_link "Drunkard", to: Routes.live_path(DrunkardWeb.Endpoint, DrunkardWeb.LiveView.Page.Show) %>
+          </div>
+          <div class="column column-10">
+            <%= live_link "[Selector]", to: Routes.live_path(DrunkardWeb.Endpoint, DrunkardWeb.LiveView.Ingredient.Selector) %>
+          </div>
+          <div class="column column-10">
+            <%= live_link "[Search]", to: Routes.live_path(DrunkardWeb.Endpoint, DrunkardWeb.LiveView.Search.All) %>
           </div>
         </div>
       
         <%=# render DrunkardWeb.SearchView, "index.html", assigns %>
-      </section>
+      </div>
     </header>
     
     <main role="main" class="container">
