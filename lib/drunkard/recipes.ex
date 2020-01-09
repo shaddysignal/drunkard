@@ -286,6 +286,8 @@ defmodule Drunkard.Recipes do
   def get_recipe!(%{uuid: uuid}), do: Repo.get!(Recipe, uuid)
   def get_recipe!(%{name: name}), do: Repo.get_by!(Recipe, name: name)
 
+  def get_random_recipe!(), do: Repo.all(from r in Recipe, order_by: fragment("random()"), limit: 1) |> Enum.at(0)
+
   def get_recipes_and_preload!(%{name_part: name_part}) do
     Repo.all(from r in Recipe, where: ilike(r.name, ^"%#{name_part}%"), preload: [:icon, :image, :glass, :tags])
   end

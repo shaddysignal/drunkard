@@ -45,7 +45,7 @@ defmodule DrunkardWeb.Router do
       # get "/login", SessionController, :new
       # post "/sessions/state", SessionController, :state
 
-      live "/signup", LiveView.User.New
+      # live "/signup", LiveView.User.New
 
       live "/search", LiveView.Search.All
       live "/search/:value", LiveView.Search.All

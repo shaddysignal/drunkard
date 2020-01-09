@@ -10,8 +10,17 @@
 
   <div class="row">
     <div class="column column-50">
-      <section class="phx-hero">
-        <p>There will be random recipe</p>
+      <section class="phx-hero container">
+        <div class="row random-recipe-row">
+          <div class="column column-50 circle-white">
+            <%= live_link to: Routes.live_path(@socket, DrunkardWeb.LiveView.Recipe.Show, @random_recipe.uuid), class: "circle-link" do %>
+              <img height="auto" src="<%= Routes.static_path(@socket, get_path(@random_recipe.image)) %>"/>
+            <% end %>
+          </div>
+          <div class="column column-50 random-recipe-title">
+            <p>Recipe "<%= live_link @random_recipe.name, to: Routes.live_path(@socket, DrunkardWeb.LiveView.Recipe.Show, @random_recipe.uuid) %>"</p>
+          </div>
+      </div>
       </section>
     </div>
     <div class="column column-50">

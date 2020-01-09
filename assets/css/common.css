@@ -6,6 +6,30 @@ header .row .column {
   text-align: right;
 }
 
+.circle-white {
+  border: 5px #ffffff solid;
+  border-radius: 20px;
+  background-color: #ffffff;
+}
+
+.circle-link {
+  margin-top: 10px;
+  display: block;
+}
+
+.random-recipe-row {
+  display: table;
+  height: 100%;
+}
+
+.random-recipe-row .column {
+  display: table-cell;
+}
+
+.random-recipe-row .random-recipe-title {
+  vertical-align: middle;
+}
+
 .empty {
   width: 100%;
 }
